@@ -1,6 +1,19 @@
 import ply.lex as lexer
 import re
 
+
+# literals are single characters. 
+# Their class(type) is the same as their lexeme.
+# They are the last thing to be checked. 
+# So if a rule starts with a literal, it will take precedence .
+literals = ['+', '-', '/', '*', '=', ',', '(', ')']
+
+
+keywords = {
+    
+}
+
+
 tokens = [
     # KEYWORDS:
     'const',  
@@ -47,4 +60,4 @@ tokens = [
     'not_equal_sign',       # <>
 ]
 
-lex.lex()
+lexer.lex(reflags=re.IGNORECASE)
