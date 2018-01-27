@@ -195,11 +195,27 @@ def p_expression(p):
                   | expression '*' expression
                   | expression '/' expression
                   | '-' expression %prec UMINUS
-                  | '(' expression ')' """    
+                  | '(' expression ')' 
+                  | var """    
 
+# ##################  Error Recovery  ##############
 
-yacc.yacc(tabmodule='parsing_tables')
-s = """
+def p_error(p): # panic mode
+    if not p:
+        print("unexpected end of file")
+        return
 
-"""
-yacc.parse(s)
+    # Read ahead looking for a closing '}'
+    print("error here -->{}:{} near {}".format(p.lineno, p.lexpos, p.value))
+    while True:
+        tok = parser.token()             # Get the next token
+        if not tok or tok.type == 'END': 
+            break
+    parser.restart()
+
+# ##################################################
+
+parser = yacc.yacc(tabmodule='parsing_tables')
+with open('input.txt') as f:
+    s = f.read()
+    yacc.parse(s)

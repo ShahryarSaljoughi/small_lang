@@ -1,0 +1,11 @@
+const my_income = 100 your_income = 200
+var our_bill : integer
+procedure sum(a, b : in integer; c: out integer);
+begin
+    c := a + b
+    return
+end
+
+begin 
+    call sum(my_income, your_income, our_bill)
+end

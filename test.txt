@@ -1,0 +1,301 @@
+program 1:
+
+const a1=10
+begin 
+    for a1:=10 to  20 + 30 do
+        print ("salam") 
+end
+
+LexToken(CONST,'const',2,1)
+LexToken(identifier,'a1',2,7)
+LexToken(=,'=',2,9)
+LexToken(integer_constant,'10',2,10)
+LexToken(BEGIN,'begin',3,13)
+LexToken(FOR,'for',4,24)
+LexToken(identifier,'a1',4,28)
+LexToken(assign_op,':=',4,30)
+LexToken(integer_constant,'10',4,32)
+LexToken(TO,'to',4,35)
+LexToken(integer_constant,'20',4,39)
+LexToken(+,'+',4,42)
+LexToken(integer_constant,'30',4,44)
+LexToken(DO,'do',4,47)
+LexToken(PRINT,'print',5,58)
+LexToken((,'(',5,64)
+LexToken(string_constant,'"salam"',5,65)
+LexToken(),')',5,72)
+LexToken(END,'end',6,75)
+**************************************************************
+program2:
+var b: integer
+begin 
+print("salam azizam azizam salam", 3*5, 10, b)
+return
+end
+
+output:
+LexToken(VAR,'var',2,1)
+LexToken(identifier,'b',2,5)
+LexToken(:,':',2,6)
+LexToken(INTEGER,'integer',2,8)
+LexToken(BEGIN,'begin',3,16)
+LexToken(PRINT,'print',4,23)
+LexToken((,'(',4,28)
+LexToken(string_constant,'"salam azizam azizam salam"',4,29)
+LexToken(,,',',4,56)
+LexToken(integer_constant,'3',4,58)
+LexToken(*,'*',4,59)
+LexToken(integer_constant,'5',4,60)
+LexToken(,,',',4,61)
+LexToken(integer_constant,'10',4,63)
+LexToken(,,',',4,65)
+LexToken(identifier,'b',4,67)
+LexToken(),')',4,68)
+LexToken(RETURN,'return',5,70)
+LexToken(END,'end',6,77)
+**************************************************************
+program3:
+begin 
+    begin 
+        const aa=84
+    end
+    return 
+end
+
+output:
+LexToken(BEGIN,'begin',2,1)
+LexToken(BEGIN,'begin',3,12)
+LexToken(CONST,'const',4,27)
+LexToken(identifier,'aa',4,33)
+LexToken(=,'=',4,35)
+LexToken(integer_constant,'84',4,36)
+LexToken(END,'end',5,43)
+LexToken(RETURN,'return',6,51)
+LexToken(END,'end',7,59)
+******************************************************************
+program4:
+
+var bb: integer
+var a: string
+var c: integer
+var d: integer
+
+procedure func1(sas : in out string);
+    begin const d=41
+        var st:string t,m,n:string
+        for r:= 5 to 50 do 
+            begin
+                read("lotfan adad ra vared konid", a)
+                print("adade vared shode=", a)
+        end
+    end
+
+begin 
+    read("salam edame midahid?", bb)
+    if bb=1 then 
+        call  func1()
+end
+
+output:
+
+LexToken(VAR,'var',3,2)
+LexToken(identifier,'bb',3,6)
+LexToken(:,':',3,8)
+LexToken(INTEGER,'integer',3,10)
+LexToken(VAR,'var',4,18)
+LexToken(identifier,'a',4,22)
+LexToken(:,':',4,23)
+LexToken(STRING,'string',4,25)
+LexToken(VAR,'var',5,32)
+LexToken(identifier,'c',5,36)
+LexToken(:,':',5,37)
+LexToken(INTEGER,'integer',5,39)
+LexToken(VAR,'var',6,47)
+LexToken(identifier,'d',6,51)
+LexToken(:,':',6,52)
+LexToken(INTEGER,'integer',6,54)
+LexToken(PROCEDURE,'procedure',8,63)
+LexToken(identifier,'func1',8,73)
+LexToken((,'(',8,78)
+LexToken(identifier,'sas',8,79)
+LexToken(:,':',8,83)
+LexToken(IN,'in',8,85)
+LexToken(OUT,'out',8,88)
+LexToken(STRING,'string',8,92)
+LexToken(),')',8,98)
+LexToken(;,';',8,99)
+LexToken(BEGIN,'begin',9,105)
+LexToken(CONST,'const',9,111)
+LexToken(identifier,'d',9,117)
+LexToken(=,'=',9,118)
+LexToken(integer_constant,'41',9,119)
+LexToken(VAR,'var',10,130)
+LexToken(identifier,'st',10,134)
+LexToken(:,':',10,136)
+LexToken(STRING,'string',10,137)
+LexToken(identifier,'t',10,144)
+LexToken(,,',',10,145)
+LexToken(identifier,'m',10,146)
+LexToken(,,',',10,147)
+LexToken(identifier,'n',10,148)
+LexToken(:,':',10,149)
+LexToken(STRING,'string',10,150)
+LexToken(FOR,'for',11,165)
+LexToken(identifier,'r',11,169)
+LexToken(assign_op,':=',11,170)
+LexToken(integer_constant,'5',11,173)
+LexToken(TO,'to',11,175)
+LexToken(integer_constant,'50',11,178)
+LexToken(DO,'do',11,181)
+LexToken(BEGIN,'begin',12,197)
+LexToken(READ,'read',13,219)
+LexToken((,'(',13,223)
+LexToken(string_constant,'"lotfan adad ra vared konid"',13,224)
+LexToken(,,',',13,252)
+LexToken(identifier,'a',13,254)
+LexToken(),')',13,255)
+LexToken(PRINT,'print',14,273)
+LexToken((,'(',14,278)
+LexToken(string_constant,'"adade vared shode="',14,279)
+LexToken(,,',',14,299)
+LexToken(identifier,'a',14,301)
+LexToken(),')',14,302)
+LexToken(END,'end',15,312)
+LexToken(END,'end',16,320)
+LexToken(BEGIN,'begin',18,325)
+LexToken(READ,'read',19,336)
+LexToken((,'(',19,340)
+LexToken(string_constant,'"salam edame midahid?"',19,341)
+LexToken(,,',',19,363)
+LexToken(identifier,'bb',19,365)
+LexToken(),')',19,367)
+LexToken(IF,'if',20,373)
+LexToken(identifier,'bb',20,376)
+LexToken(=,'=',20,378)
+LexToken(integer_constant,'1',20,379)
+LexToken(THEN,'then',20,381)
+LexToken(CALL,'call',21,395)
+LexToken(identifier,'func1',21,401)
+LexToken((,'(',21,406)
+LexToken(),')',21,407)
+LexToken(END,'end',22,409)
+
+************************************************************
+const a=10
+const b=3
+const c=5
+var result: integer
+var e: string
+
+procedure max(a:in out integer, b:in integer, c:in integer, max: out integer)
+begin
+    var max: integer
+    max := a
+    if b>max then max := b 
+    if c>max then max := c
+    return;
+end
+
+begin 
+    
+    call max(a, b, c, result)
+    print("max is :", result)
+end
+
+output:
+
+LexToken(VAR,'var',3,2)
+LexToken(identifier,'bb',3,6)
+LexToken(:,':',3,8)
+LexToken(INTEGER,'integer',3,10)
+LexToken(CONST,'const',4,18)
+LexToken(identifier,'a',4,24)
+LexToken(=,'=',4,25)
+LexToken(integer_constant,'10',4,26)
+LexToken(CONST,'const',5,29)
+LexToken(identifier,'b',5,35)
+LexToken(=,'=',5,36)
+LexToken(integer_constant,'3',5,37)
+LexToken(CONST,'const',6,39)
+LexToken(identifier,'c',6,45)
+LexToken(=,'=',6,46)
+LexToken(integer_constant,'5',6,47)
+LexToken(VAR,'var',7,49)
+LexToken(identifier,'result',7,53)
+LexToken(:,':',7,59)
+LexToken(INTEGER,'integer',7,61)
+LexToken(VAR,'var',8,69)
+LexToken(identifier,'e',8,73)
+LexToken(:,':',8,74)
+LexToken(STRING,'string',8,76)
+LexToken(PROCEDURE,'procedure',10,84)
+LexToken(identifier,'max',10,94)
+LexToken((,'(',10,97)
+LexToken(identifier,'a',10,98)
+LexToken(:,':',10,99)
+LexToken(IN,'in',10,100)
+LexToken(OUT,'out',10,103)
+LexToken(INTEGER,'integer',10,107)
+LexToken(,,',',10,114)
+LexToken(identifier,'b',10,116)
+LexToken(:,':',10,117)
+LexToken(IN,'in',10,118)
+LexToken(INTEGER,'integer',10,121)
+LexToken(,,',',10,128)
+LexToken(identifier,'c',10,130)
+LexToken(:,':',10,131)
+LexToken(IN,'in',10,132)
+LexToken(INTEGER,'integer',10,135)
+LexToken(,,',',10,142)
+LexToken(identifier,'max',10,144)
+LexToken(:,':',10,147)
+LexToken(OUT,'out',10,149)
+LexToken(INTEGER,'integer',10,153)
+LexToken(),')',10,160)
+LexToken(BEGIN,'begin',11,162)
+LexToken(VAR,'var',12,172)
+LexToken(identifier,'max',12,176)
+LexToken(:,':',12,179)
+LexToken(INTEGER,'integer',12,181)
+LexToken(identifier,'max',13,193)
+LexToken(assign_op,':=',13,197)
+LexToken(identifier,'a',13,200)
+LexToken(IF,'if',14,206)
+LexToken(identifier,'b',14,209)
+LexToken(>,'>',14,210)
+LexToken(identifier,'max',14,211)
+LexToken(THEN,'then',14,215)
+LexToken(identifier,'max',14,220)
+LexToken(assign_op,':=',14,224)
+LexToken(identifier,'b',14,227)
+LexToken(IF,'if',15,234)
+LexToken(identifier,'c',15,237)
+LexToken(>,'>',15,238)
+LexToken(identifier,'max',15,239)
+LexToken(THEN,'then',15,243)
+LexToken(identifier,'max',15,248)
+LexToken(assign_op,':=',15,252)
+LexToken(identifier,'c',15,255)
+LexToken(RETURN,'return',16,261)
+LexToken(;,';',16,267)
+LexToken(END,'end',17,269)
+LexToken(BEGIN,'begin',19,274)
+LexToken(CALL,'call',21,290)
+LexToken(identifier,'max',21,295)
+LexToken((,'(',21,298)
+LexToken(identifier,'a',21,299)
+LexToken(,,',',21,300)
+LexToken(identifier,'b',21,302)
+LexToken(,,',',21,303)
+LexToken(identifier,'c',21,305)
+LexToken(,,',',21,306)
+LexToken(identifier,'result',21,308)
+LexToken(),')',21,314)
+LexToken(PRINT,'print',22,320)
+LexToken((,'(',22,325)
+LexToken(string_constant,'"max is :"',22,326)
+LexToken(,,',',22,336)
+LexToken(identifier,'result',22,338)
+LexToken(),')',22,344)
+LexToken(END,'end',23,346)
+**************************************************************************
