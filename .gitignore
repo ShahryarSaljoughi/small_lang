@@ -1,3 +1,6 @@
 env/
 test.py
 __pycache__/
+*.pdf
+*.rar
+CompilerProject/
