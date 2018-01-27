@@ -1,0 +1,2553 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    STRING
+    comment
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> A B C BEGIN D END
+Rule 2     A -> empty
+Rule 3     A -> CONST A_1
+Rule 4     A_1 -> const_decl
+Rule 5     A_1 -> const_decl A_1
+Rule 6     B -> empty
+Rule 7     B -> VAR B_1
+Rule 8     B_1 -> var_decl
+Rule 9     B_1 -> var_decl B_1
+Rule 10    C -> empty
+Rule 11    C -> proc_decl C
+Rule 12    D -> statement
+Rule 13    D -> statement D
+Rule 14    const_decl -> identifier E = integer_constant
+Rule 15    E -> empty
+Rule 16    E -> , identifier E
+Rule 17    var_decl -> identifier E : type
+Rule 18    proc_decl -> PROCEDURE identifier ( F ) ; block
+Rule 19    F -> empty
+Rule 20    F -> format F_1
+Rule 21    F_1 -> empty
+Rule 22    F_1 -> ; format F_1
+Rule 23    format -> identifier E : type
+Rule 24    format -> identifier E : mode type
+Rule 25    mode -> IN
+Rule 26    mode -> OUT
+Rule 27    mode -> IN_OUT
+Rule 28    type -> INTEGER
+Rule 29    block -> BEGIN A B D END
+Rule 30    block -> BEGIN A B END
+Rule 31    print -> PRINT ( string_constant G )
+Rule 32    G -> empty
+Rule 33    G -> , expression G
+Rule 34    read -> READ ( string_constant H )
+Rule 35    H -> empty
+Rule 36    H -> , var H
+Rule 37    cond -> IF bool THEN statement
+Rule 38    cond -> IF bool THEN statement ELSE statement
+Rule 39    call -> CALL identifier ( )
+Rule 40    call -> CALL identifier ( expression G )
+Rule 41    var -> identifier
+Rule 42    var -> identifier [ expression ]
+Rule 43    statement_assign -> var assign_op expression
+Rule 44    statement -> block
+Rule 45    statement -> print
+Rule 46    statement -> read
+Rule 47    statement -> statement_assign
+Rule 48    statement -> cond
+Rule 49    statement -> statement_for
+Rule 50    statement -> return
+Rule 51    statement -> call
+Rule 52    return -> RETURN
+Rule 53    bool -> NOT bool
+Rule 54    bool -> bool AND bool
+Rule 55    bool -> bool OR bool
+Rule 56    bool -> expression relop expression
+Rule 57    bool -> ( bool )
+Rule 58    empty -> <empty>
+Rule 59    statement_for -> FOR identifier assign_op TO expression DO statement
+Rule 60    relop -> =
+Rule 61    relop -> less_equal_sign
+Rule 62    relop -> >
+Rule 63    relop -> greater_equal_sign
+Rule 64    relop -> <
+Rule 65    relop -> not_equal_sign
+Rule 66    expression -> integer_constant
+Rule 67    expression -> expression + expression
+Rule 68    expression -> expression - expression
+Rule 69    expression -> expression * expression
+Rule 70    expression -> expression / expression
+Rule 71    expression -> - expression
+Rule 72    expression -> ( expression )
+
+Terminals, with rules where they appear
+
+(                    : 18 31 34 39 40 57 72
+)                    : 18 31 34 39 40 57 72
+*                    : 69
++                    : 67
+,                    : 16 33 36
+-                    : 68 71
+/                    : 70
+:                    : 17 23 24
+;                    : 18 22
+<                    : 64
+=                    : 14 60
+>                    : 62
+AND                  : 54
+BEGIN                : 1 29 30
+CALL                 : 39 40
+CONST                : 3
+DO                   : 59
+ELSE                 : 38
+END                  : 1 29 30
+FOR                  : 59
+IF                   : 37 38
+IN                   : 25
+INTEGER              : 28
+IN_OUT               : 27
+NOT                  : 53
+OR                   : 55
+OUT                  : 26
+PRINT                : 31
+PROCEDURE            : 18
+READ                 : 34
+RETURN               : 52
+STRING               : 
+THEN                 : 37 38
+TO                   : 59
+VAR                  : 7
+[                    : 42
+]                    : 42
+assign_op            : 43 59
+comment              : 
+error                : 
+greater_equal_sign   : 63
+identifier           : 14 16 17 18 23 24 39 40 41 42 59
+integer_constant     : 14 66
+less_equal_sign      : 61
+not_equal_sign       : 65
+string_constant      : 31 34
+
+Nonterminals, with rules where they appear
+
+A                    : 1 29 30
+A_1                  : 3 5
+B                    : 1 29 30
+B_1                  : 7 9
+C                    : 1 11
+D                    : 1 13 29
+E                    : 14 16 17 23 24
+F                    : 18
+F_1                  : 20 22
+G                    : 31 33 40
+H                    : 34 36
+block                : 18 44
+bool                 : 37 38 53 54 54 55 55 57
+call                 : 51
+cond                 : 48
+const_decl           : 4 5
+empty                : 2 6 10 15 19 21 32 35
+expression           : 33 40 42 43 56 56 59 67 67 68 68 69 69 70 70 71 72
+format               : 20 22
+mode                 : 24
+print                : 45
+proc_decl            : 11
+program              : 0
+read                 : 46
+relop                : 56
+return               : 50
+statement            : 12 13 37 38 38 59
+statement_assign     : 47
+statement_for        : 49
+type                 : 17 23 24
+var                  : 36 43
+var_decl             : 8 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . A B C BEGIN D END
+    (2) A -> . empty
+    (3) A -> . CONST A_1
+    (58) empty -> .
+
+    CONST           shift and go to state 1
+    VAR             reduce using rule 58 (empty -> .)
+    PROCEDURE       reduce using rule 58 (empty -> .)
+    BEGIN           reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 3
+    program                        shift and go to state 2
+    A                              shift and go to state 4
+
+state 1
+
+    (3) A -> CONST . A_1
+    (4) A_1 -> . const_decl
+    (5) A_1 -> . const_decl A_1
+    (14) const_decl -> . identifier E = integer_constant
+
+    identifier      shift and go to state 7
+
+    const_decl                     shift and go to state 5
+    A_1                            shift and go to state 6
+
+state 2
+
+    (0) S' -> program .
+
+
+
+state 3
+
+    (2) A -> empty .
+
+    VAR             reduce using rule 2 (A -> empty .)
+    PROCEDURE       reduce using rule 2 (A -> empty .)
+    BEGIN           reduce using rule 2 (A -> empty .)
+    END             reduce using rule 2 (A -> empty .)
+    PRINT           reduce using rule 2 (A -> empty .)
+    READ            reduce using rule 2 (A -> empty .)
+    IF              reduce using rule 2 (A -> empty .)
+    FOR             reduce using rule 2 (A -> empty .)
+    RETURN          reduce using rule 2 (A -> empty .)
+    CALL            reduce using rule 2 (A -> empty .)
+    identifier      reduce using rule 2 (A -> empty .)
+
+
+state 4
+
+    (1) program -> A . B C BEGIN D END
+    (6) B -> . empty
+    (7) B -> . VAR B_1
+    (58) empty -> .
+
+    VAR             shift and go to state 10
+    PROCEDURE       reduce using rule 58 (empty -> .)
+    BEGIN           reduce using rule 58 (empty -> .)
+
+    B                              shift and go to state 9
+    empty                          shift and go to state 8
+
+state 5
+
+    (4) A_1 -> const_decl .
+    (5) A_1 -> const_decl . A_1
+    (4) A_1 -> . const_decl
+    (5) A_1 -> . const_decl A_1
+    (14) const_decl -> . identifier E = integer_constant
+
+  ! shift/reduce conflict for identifier resolved as shift
+    VAR             reduce using rule 4 (A_1 -> const_decl .)
+    PROCEDURE       reduce using rule 4 (A_1 -> const_decl .)
+    BEGIN           reduce using rule 4 (A_1 -> const_decl .)
+    END             reduce using rule 4 (A_1 -> const_decl .)
+    PRINT           reduce using rule 4 (A_1 -> const_decl .)
+    READ            reduce using rule 4 (A_1 -> const_decl .)
+    IF              reduce using rule 4 (A_1 -> const_decl .)
+    FOR             reduce using rule 4 (A_1 -> const_decl .)
+    RETURN          reduce using rule 4 (A_1 -> const_decl .)
+    CALL            reduce using rule 4 (A_1 -> const_decl .)
+    identifier      shift and go to state 7
+
+  ! identifier      [ reduce using rule 4 (A_1 -> const_decl .) ]
+
+    const_decl                     shift and go to state 5
+    A_1                            shift and go to state 11
+
+state 6
+
+    (3) A -> CONST A_1 .
+
+    VAR             reduce using rule 3 (A -> CONST A_1 .)
+    PROCEDURE       reduce using rule 3 (A -> CONST A_1 .)
+    BEGIN           reduce using rule 3 (A -> CONST A_1 .)
+    END             reduce using rule 3 (A -> CONST A_1 .)
+    PRINT           reduce using rule 3 (A -> CONST A_1 .)
+    READ            reduce using rule 3 (A -> CONST A_1 .)
+    IF              reduce using rule 3 (A -> CONST A_1 .)
+    FOR             reduce using rule 3 (A -> CONST A_1 .)
+    RETURN          reduce using rule 3 (A -> CONST A_1 .)
+    CALL            reduce using rule 3 (A -> CONST A_1 .)
+    identifier      reduce using rule 3 (A -> CONST A_1 .)
+
+
+state 7
+
+    (14) const_decl -> identifier . E = integer_constant
+    (15) E -> . empty
+    (16) E -> . , identifier E
+    (58) empty -> .
+
+    ,               shift and go to state 13
+    =               reduce using rule 58 (empty -> .)
+
+    E                              shift and go to state 12
+    empty                          shift and go to state 14
+
+state 8
+
+    (6) B -> empty .
+
+    END             reduce using rule 6 (B -> empty .)
+    BEGIN           reduce using rule 6 (B -> empty .)
+    PRINT           reduce using rule 6 (B -> empty .)
+    READ            reduce using rule 6 (B -> empty .)
+    IF              reduce using rule 6 (B -> empty .)
+    FOR             reduce using rule 6 (B -> empty .)
+    RETURN          reduce using rule 6 (B -> empty .)
+    CALL            reduce using rule 6 (B -> empty .)
+    identifier      reduce using rule 6 (B -> empty .)
+    PROCEDURE       reduce using rule 6 (B -> empty .)
+
+
+state 9
+
+    (1) program -> A B . C BEGIN D END
+    (10) C -> . empty
+    (11) C -> . proc_decl C
+    (58) empty -> .
+    (18) proc_decl -> . PROCEDURE identifier ( F ) ; block
+
+    BEGIN           reduce using rule 58 (empty -> .)
+    PROCEDURE       shift and go to state 16
+
+    C                              shift and go to state 17
+    empty                          shift and go to state 18
+    proc_decl                      shift and go to state 15
+
+state 10
+
+    (7) B -> VAR . B_1
+    (8) B_1 -> . var_decl
+    (9) B_1 -> . var_decl B_1
+    (17) var_decl -> . identifier E : type
+
+    identifier      shift and go to state 20
+
+    B_1                            shift and go to state 21
+    var_decl                       shift and go to state 19
+
+state 11
+
+    (5) A_1 -> const_decl A_1 .
+
+    VAR             reduce using rule 5 (A_1 -> const_decl A_1 .)
+    PROCEDURE       reduce using rule 5 (A_1 -> const_decl A_1 .)
+    BEGIN           reduce using rule 5 (A_1 -> const_decl A_1 .)
+    END             reduce using rule 5 (A_1 -> const_decl A_1 .)
+    PRINT           reduce using rule 5 (A_1 -> const_decl A_1 .)
+    READ            reduce using rule 5 (A_1 -> const_decl A_1 .)
+    IF              reduce using rule 5 (A_1 -> const_decl A_1 .)
+    FOR             reduce using rule 5 (A_1 -> const_decl A_1 .)
+    RETURN          reduce using rule 5 (A_1 -> const_decl A_1 .)
+    CALL            reduce using rule 5 (A_1 -> const_decl A_1 .)
+    identifier      reduce using rule 5 (A_1 -> const_decl A_1 .)
+
+
+state 12
+
+    (14) const_decl -> identifier E . = integer_constant
+
+    =               shift and go to state 22
+
+
+state 13
+
+    (16) E -> , . identifier E
+
+    identifier      shift and go to state 23
+
+
+state 14
+
+    (15) E -> empty .
+
+    :               reduce using rule 15 (E -> empty .)
+    =               reduce using rule 15 (E -> empty .)
+
+
+state 15
+
+    (11) C -> proc_decl . C
+    (10) C -> . empty
+    (11) C -> . proc_decl C
+    (58) empty -> .
+    (18) proc_decl -> . PROCEDURE identifier ( F ) ; block
+
+    BEGIN           reduce using rule 58 (empty -> .)
+    PROCEDURE       shift and go to state 16
+
+    C                              shift and go to state 24
+    proc_decl                      shift and go to state 15
+    empty                          shift and go to state 18
+
+state 16
+
+    (18) proc_decl -> PROCEDURE . identifier ( F ) ; block
+
+    identifier      shift and go to state 25
+
+
+state 17
+
+    (1) program -> A B C . BEGIN D END
+
+    BEGIN           shift and go to state 26
+
+
+state 18
+
+    (10) C -> empty .
+
+    BEGIN           reduce using rule 10 (C -> empty .)
+
+
+state 19
+
+    (8) B_1 -> var_decl .
+    (9) B_1 -> var_decl . B_1
+    (8) B_1 -> . var_decl
+    (9) B_1 -> . var_decl B_1
+    (17) var_decl -> . identifier E : type
+
+  ! shift/reduce conflict for identifier resolved as shift
+    PROCEDURE       reduce using rule 8 (B_1 -> var_decl .)
+    BEGIN           reduce using rule 8 (B_1 -> var_decl .)
+    END             reduce using rule 8 (B_1 -> var_decl .)
+    PRINT           reduce using rule 8 (B_1 -> var_decl .)
+    READ            reduce using rule 8 (B_1 -> var_decl .)
+    IF              reduce using rule 8 (B_1 -> var_decl .)
+    FOR             reduce using rule 8 (B_1 -> var_decl .)
+    RETURN          reduce using rule 8 (B_1 -> var_decl .)
+    CALL            reduce using rule 8 (B_1 -> var_decl .)
+    identifier      shift and go to state 20
+
+  ! identifier      [ reduce using rule 8 (B_1 -> var_decl .) ]
+
+    B_1                            shift and go to state 27
+    var_decl                       shift and go to state 19
+
+state 20
+
+    (17) var_decl -> identifier . E : type
+    (15) E -> . empty
+    (16) E -> . , identifier E
+    (58) empty -> .
+
+    ,               shift and go to state 13
+    :               reduce using rule 58 (empty -> .)
+
+    E                              shift and go to state 28
+    empty                          shift and go to state 14
+
+state 21
+
+    (7) B -> VAR B_1 .
+
+    END             reduce using rule 7 (B -> VAR B_1 .)
+    BEGIN           reduce using rule 7 (B -> VAR B_1 .)
+    PRINT           reduce using rule 7 (B -> VAR B_1 .)
+    READ            reduce using rule 7 (B -> VAR B_1 .)
+    IF              reduce using rule 7 (B -> VAR B_1 .)
+    FOR             reduce using rule 7 (B -> VAR B_1 .)
+    RETURN          reduce using rule 7 (B -> VAR B_1 .)
+    CALL            reduce using rule 7 (B -> VAR B_1 .)
+    identifier      reduce using rule 7 (B -> VAR B_1 .)
+    PROCEDURE       reduce using rule 7 (B -> VAR B_1 .)
+
+
+state 22
+
+    (14) const_decl -> identifier E = . integer_constant
+
+    integer_constant shift and go to state 29
+
+
+state 23
+
+    (16) E -> , identifier . E
+    (15) E -> . empty
+    (16) E -> . , identifier E
+    (58) empty -> .
+
+    ,               shift and go to state 13
+    =               reduce using rule 58 (empty -> .)
+    :               reduce using rule 58 (empty -> .)
+
+    E                              shift and go to state 30
+    empty                          shift and go to state 14
+
+state 24
+
+    (11) C -> proc_decl C .
+
+    BEGIN           reduce using rule 11 (C -> proc_decl C .)
+
+
+state 25
+
+    (18) proc_decl -> PROCEDURE identifier . ( F ) ; block
+
+    (               shift and go to state 31
+
+
+state 26
+
+    (1) program -> A B C BEGIN . D END
+    (12) D -> . statement
+    (13) D -> . statement D
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 40
+    D                              shift and go to state 41
+    var                            shift and go to state 42
+    statement_assign               shift and go to state 33
+    return                         shift and go to state 45
+    call                           shift and go to state 34
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    print                          shift and go to state 38
+
+state 27
+
+    (9) B_1 -> var_decl B_1 .
+
+    PROCEDURE       reduce using rule 9 (B_1 -> var_decl B_1 .)
+    BEGIN           reduce using rule 9 (B_1 -> var_decl B_1 .)
+    END             reduce using rule 9 (B_1 -> var_decl B_1 .)
+    PRINT           reduce using rule 9 (B_1 -> var_decl B_1 .)
+    READ            reduce using rule 9 (B_1 -> var_decl B_1 .)
+    IF              reduce using rule 9 (B_1 -> var_decl B_1 .)
+    FOR             reduce using rule 9 (B_1 -> var_decl B_1 .)
+    RETURN          reduce using rule 9 (B_1 -> var_decl B_1 .)
+    CALL            reduce using rule 9 (B_1 -> var_decl B_1 .)
+    identifier      reduce using rule 9 (B_1 -> var_decl B_1 .)
+
+
+state 28
+
+    (17) var_decl -> identifier E . : type
+
+    :               shift and go to state 51
+
+
+state 29
+
+    (14) const_decl -> identifier E = integer_constant .
+
+    identifier      reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    VAR             reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    PROCEDURE       reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    BEGIN           reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    END             reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    PRINT           reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    READ            reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    IF              reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    FOR             reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    RETURN          reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+    CALL            reduce using rule 14 (const_decl -> identifier E = integer_constant .)
+
+
+state 30
+
+    (16) E -> , identifier E .
+
+    :               reduce using rule 16 (E -> , identifier E .)
+    =               reduce using rule 16 (E -> , identifier E .)
+
+
+state 31
+
+    (18) proc_decl -> PROCEDURE identifier ( . F ) ; block
+    (19) F -> . empty
+    (20) F -> . format F_1
+    (58) empty -> .
+    (23) format -> . identifier E : type
+    (24) format -> . identifier E : mode type
+
+    )               reduce using rule 58 (empty -> .)
+    identifier      shift and go to state 53
+
+    format                         shift and go to state 52
+    F                              shift and go to state 55
+    empty                          shift and go to state 54
+
+state 32
+
+    (39) call -> CALL . identifier ( )
+    (40) call -> CALL . identifier ( expression G )
+
+    identifier      shift and go to state 56
+
+
+state 33
+
+    (47) statement -> statement_assign .
+
+    BEGIN           reduce using rule 47 (statement -> statement_assign .)
+    PRINT           reduce using rule 47 (statement -> statement_assign .)
+    READ            reduce using rule 47 (statement -> statement_assign .)
+    IF              reduce using rule 47 (statement -> statement_assign .)
+    FOR             reduce using rule 47 (statement -> statement_assign .)
+    RETURN          reduce using rule 47 (statement -> statement_assign .)
+    CALL            reduce using rule 47 (statement -> statement_assign .)
+    identifier      reduce using rule 47 (statement -> statement_assign .)
+    END             reduce using rule 47 (statement -> statement_assign .)
+    ELSE            reduce using rule 47 (statement -> statement_assign .)
+
+
+state 34
+
+    (51) statement -> call .
+
+    BEGIN           reduce using rule 51 (statement -> call .)
+    PRINT           reduce using rule 51 (statement -> call .)
+    READ            reduce using rule 51 (statement -> call .)
+    IF              reduce using rule 51 (statement -> call .)
+    FOR             reduce using rule 51 (statement -> call .)
+    RETURN          reduce using rule 51 (statement -> call .)
+    CALL            reduce using rule 51 (statement -> call .)
+    identifier      reduce using rule 51 (statement -> call .)
+    END             reduce using rule 51 (statement -> call .)
+    ELSE            reduce using rule 51 (statement -> call .)
+
+
+state 35
+
+    (46) statement -> read .
+
+    BEGIN           reduce using rule 46 (statement -> read .)
+    PRINT           reduce using rule 46 (statement -> read .)
+    READ            reduce using rule 46 (statement -> read .)
+    IF              reduce using rule 46 (statement -> read .)
+    FOR             reduce using rule 46 (statement -> read .)
+    RETURN          reduce using rule 46 (statement -> read .)
+    CALL            reduce using rule 46 (statement -> read .)
+    identifier      reduce using rule 46 (statement -> read .)
+    END             reduce using rule 46 (statement -> read .)
+    ELSE            reduce using rule 46 (statement -> read .)
+
+
+state 36
+
+    (49) statement -> statement_for .
+
+    BEGIN           reduce using rule 49 (statement -> statement_for .)
+    PRINT           reduce using rule 49 (statement -> statement_for .)
+    READ            reduce using rule 49 (statement -> statement_for .)
+    IF              reduce using rule 49 (statement -> statement_for .)
+    FOR             reduce using rule 49 (statement -> statement_for .)
+    RETURN          reduce using rule 49 (statement -> statement_for .)
+    CALL            reduce using rule 49 (statement -> statement_for .)
+    identifier      reduce using rule 49 (statement -> statement_for .)
+    END             reduce using rule 49 (statement -> statement_for .)
+    ELSE            reduce using rule 49 (statement -> statement_for .)
+
+
+state 37
+
+    (48) statement -> cond .
+
+    BEGIN           reduce using rule 48 (statement -> cond .)
+    PRINT           reduce using rule 48 (statement -> cond .)
+    READ            reduce using rule 48 (statement -> cond .)
+    IF              reduce using rule 48 (statement -> cond .)
+    FOR             reduce using rule 48 (statement -> cond .)
+    RETURN          reduce using rule 48 (statement -> cond .)
+    CALL            reduce using rule 48 (statement -> cond .)
+    identifier      reduce using rule 48 (statement -> cond .)
+    END             reduce using rule 48 (statement -> cond .)
+    ELSE            reduce using rule 48 (statement -> cond .)
+
+
+state 38
+
+    (45) statement -> print .
+
+    BEGIN           reduce using rule 45 (statement -> print .)
+    PRINT           reduce using rule 45 (statement -> print .)
+    READ            reduce using rule 45 (statement -> print .)
+    IF              reduce using rule 45 (statement -> print .)
+    FOR             reduce using rule 45 (statement -> print .)
+    RETURN          reduce using rule 45 (statement -> print .)
+    CALL            reduce using rule 45 (statement -> print .)
+    identifier      reduce using rule 45 (statement -> print .)
+    END             reduce using rule 45 (statement -> print .)
+    ELSE            reduce using rule 45 (statement -> print .)
+
+
+state 39
+
+    (44) statement -> block .
+
+    BEGIN           reduce using rule 44 (statement -> block .)
+    PRINT           reduce using rule 44 (statement -> block .)
+    READ            reduce using rule 44 (statement -> block .)
+    IF              reduce using rule 44 (statement -> block .)
+    FOR             reduce using rule 44 (statement -> block .)
+    RETURN          reduce using rule 44 (statement -> block .)
+    CALL            reduce using rule 44 (statement -> block .)
+    identifier      reduce using rule 44 (statement -> block .)
+    END             reduce using rule 44 (statement -> block .)
+    ELSE            reduce using rule 44 (statement -> block .)
+
+
+state 40
+
+    (12) D -> statement .
+    (13) D -> statement . D
+    (12) D -> . statement
+    (13) D -> . statement D
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    END             reduce using rule 12 (D -> statement .)
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 40
+    D                              shift and go to state 57
+    var                            shift and go to state 42
+    statement_assign               shift and go to state 33
+    call                           shift and go to state 34
+    return                         shift and go to state 45
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    print                          shift and go to state 38
+
+state 41
+
+    (1) program -> A B C BEGIN D . END
+
+    END             shift and go to state 58
+
+
+state 42
+
+    (43) statement_assign -> var . assign_op expression
+
+    assign_op       shift and go to state 59
+
+
+state 43
+
+    (41) var -> identifier .
+    (42) var -> identifier . [ expression ]
+
+    assign_op       reduce using rule 41 (var -> identifier .)
+    ,               reduce using rule 41 (var -> identifier .)
+    )               reduce using rule 41 (var -> identifier .)
+    [               shift and go to state 60
+
+
+state 44
+
+    (29) block -> BEGIN . A B D END
+    (30) block -> BEGIN . A B END
+    (2) A -> . empty
+    (3) A -> . CONST A_1
+    (58) empty -> .
+
+    CONST           shift and go to state 1
+    VAR             reduce using rule 58 (empty -> .)
+    END             reduce using rule 58 (empty -> .)
+    BEGIN           reduce using rule 58 (empty -> .)
+    PRINT           reduce using rule 58 (empty -> .)
+    READ            reduce using rule 58 (empty -> .)
+    IF              reduce using rule 58 (empty -> .)
+    FOR             reduce using rule 58 (empty -> .)
+    RETURN          reduce using rule 58 (empty -> .)
+    CALL            reduce using rule 58 (empty -> .)
+    identifier      reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 3
+    A                              shift and go to state 61
+
+state 45
+
+    (50) statement -> return .
+
+    BEGIN           reduce using rule 50 (statement -> return .)
+    PRINT           reduce using rule 50 (statement -> return .)
+    READ            reduce using rule 50 (statement -> return .)
+    IF              reduce using rule 50 (statement -> return .)
+    FOR             reduce using rule 50 (statement -> return .)
+    RETURN          reduce using rule 50 (statement -> return .)
+    CALL            reduce using rule 50 (statement -> return .)
+    identifier      reduce using rule 50 (statement -> return .)
+    END             reduce using rule 50 (statement -> return .)
+    ELSE            reduce using rule 50 (statement -> return .)
+
+
+state 46
+
+    (59) statement_for -> FOR . identifier assign_op TO expression DO statement
+
+    identifier      shift and go to state 62
+
+
+state 47
+
+    (37) cond -> IF . bool THEN statement
+    (38) cond -> IF . bool THEN statement ELSE statement
+    (53) bool -> . NOT bool
+    (54) bool -> . bool AND bool
+    (55) bool -> . bool OR bool
+    (56) bool -> . expression relop expression
+    (57) bool -> . ( bool )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    NOT             shift and go to state 67
+    (               shift and go to state 66
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+
+    expression                     shift and go to state 63
+    bool                           shift and go to state 68
+
+state 48
+
+    (52) return -> RETURN .
+
+    BEGIN           reduce using rule 52 (return -> RETURN .)
+    PRINT           reduce using rule 52 (return -> RETURN .)
+    READ            reduce using rule 52 (return -> RETURN .)
+    IF              reduce using rule 52 (return -> RETURN .)
+    FOR             reduce using rule 52 (return -> RETURN .)
+    RETURN          reduce using rule 52 (return -> RETURN .)
+    CALL            reduce using rule 52 (return -> RETURN .)
+    identifier      reduce using rule 52 (return -> RETURN .)
+    END             reduce using rule 52 (return -> RETURN .)
+    ELSE            reduce using rule 52 (return -> RETURN .)
+
+
+state 49
+
+    (31) print -> PRINT . ( string_constant G )
+
+    (               shift and go to state 69
+
+
+state 50
+
+    (34) read -> READ . ( string_constant H )
+
+    (               shift and go to state 70
+
+
+state 51
+
+    (17) var_decl -> identifier E : . type
+    (28) type -> . INTEGER
+
+    INTEGER         shift and go to state 72
+
+    type                           shift and go to state 71
+
+state 52
+
+    (20) F -> format . F_1
+    (21) F_1 -> . empty
+    (22) F_1 -> . ; format F_1
+    (58) empty -> .
+
+    ;               shift and go to state 73
+    )               reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 74
+    F_1                            shift and go to state 75
+
+state 53
+
+    (23) format -> identifier . E : type
+    (24) format -> identifier . E : mode type
+    (15) E -> . empty
+    (16) E -> . , identifier E
+    (58) empty -> .
+
+    ,               shift and go to state 13
+    :               reduce using rule 58 (empty -> .)
+
+    E                              shift and go to state 76
+    empty                          shift and go to state 14
+
+state 54
+
+    (19) F -> empty .
+
+    )               reduce using rule 19 (F -> empty .)
+
+
+state 55
+
+    (18) proc_decl -> PROCEDURE identifier ( F . ) ; block
+
+    )               shift and go to state 77
+
+
+state 56
+
+    (39) call -> CALL identifier . ( )
+    (40) call -> CALL identifier . ( expression G )
+
+    (               shift and go to state 78
+
+
+state 57
+
+    (13) D -> statement D .
+
+    END             reduce using rule 13 (D -> statement D .)
+
+
+state 58
+
+    (1) program -> A B C BEGIN D END .
+
+    $end            reduce using rule 1 (program -> A B C BEGIN D END .)
+
+
+state 59
+
+    (43) statement_assign -> var assign_op . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 79
+
+state 60
+
+    (42) var -> identifier [ . expression ]
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 81
+
+state 61
+
+    (29) block -> BEGIN A . B D END
+    (30) block -> BEGIN A . B END
+    (6) B -> . empty
+    (7) B -> . VAR B_1
+    (58) empty -> .
+
+    VAR             shift and go to state 10
+    END             reduce using rule 58 (empty -> .)
+    BEGIN           reduce using rule 58 (empty -> .)
+    PRINT           reduce using rule 58 (empty -> .)
+    READ            reduce using rule 58 (empty -> .)
+    IF              reduce using rule 58 (empty -> .)
+    FOR             reduce using rule 58 (empty -> .)
+    RETURN          reduce using rule 58 (empty -> .)
+    CALL            reduce using rule 58 (empty -> .)
+    identifier      reduce using rule 58 (empty -> .)
+
+    B                              shift and go to state 82
+    empty                          shift and go to state 8
+
+state 62
+
+    (59) statement_for -> FOR identifier . assign_op TO expression DO statement
+
+    assign_op       shift and go to state 83
+
+
+state 63
+
+    (56) bool -> expression . relop expression
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+    (60) relop -> . =
+    (61) relop -> . less_equal_sign
+    (62) relop -> . >
+    (63) relop -> . greater_equal_sign
+    (64) relop -> . <
+    (65) relop -> . not_equal_sign
+
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+    =               shift and go to state 85
+    less_equal_sign shift and go to state 90
+    >               shift and go to state 84
+    greater_equal_sign shift and go to state 93
+    <               shift and go to state 94
+    not_equal_sign  shift and go to state 91
+
+    relop                          shift and go to state 92
+
+state 64
+
+    (71) expression -> - . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 95
+
+state 65
+
+    (66) expression -> integer_constant .
+
+    +               reduce using rule 66 (expression -> integer_constant .)
+    -               reduce using rule 66 (expression -> integer_constant .)
+    *               reduce using rule 66 (expression -> integer_constant .)
+    /               reduce using rule 66 (expression -> integer_constant .)
+    =               reduce using rule 66 (expression -> integer_constant .)
+    less_equal_sign reduce using rule 66 (expression -> integer_constant .)
+    >               reduce using rule 66 (expression -> integer_constant .)
+    greater_equal_sign reduce using rule 66 (expression -> integer_constant .)
+    <               reduce using rule 66 (expression -> integer_constant .)
+    not_equal_sign  reduce using rule 66 (expression -> integer_constant .)
+    BEGIN           reduce using rule 66 (expression -> integer_constant .)
+    PRINT           reduce using rule 66 (expression -> integer_constant .)
+    READ            reduce using rule 66 (expression -> integer_constant .)
+    IF              reduce using rule 66 (expression -> integer_constant .)
+    FOR             reduce using rule 66 (expression -> integer_constant .)
+    RETURN          reduce using rule 66 (expression -> integer_constant .)
+    CALL            reduce using rule 66 (expression -> integer_constant .)
+    identifier      reduce using rule 66 (expression -> integer_constant .)
+    END             reduce using rule 66 (expression -> integer_constant .)
+    ELSE            reduce using rule 66 (expression -> integer_constant .)
+    ]               reduce using rule 66 (expression -> integer_constant .)
+    )               reduce using rule 66 (expression -> integer_constant .)
+    ,               reduce using rule 66 (expression -> integer_constant .)
+    THEN            reduce using rule 66 (expression -> integer_constant .)
+    AND             reduce using rule 66 (expression -> integer_constant .)
+    OR              reduce using rule 66 (expression -> integer_constant .)
+    DO              reduce using rule 66 (expression -> integer_constant .)
+
+
+state 66
+
+    (57) bool -> ( . bool )
+    (72) expression -> ( . expression )
+    (53) bool -> . NOT bool
+    (54) bool -> . bool AND bool
+    (55) bool -> . bool OR bool
+    (56) bool -> . expression relop expression
+    (57) bool -> . ( bool )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    NOT             shift and go to state 67
+    (               shift and go to state 66
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+
+    expression                     shift and go to state 96
+    bool                           shift and go to state 97
+
+state 67
+
+    (53) bool -> NOT . bool
+    (53) bool -> . NOT bool
+    (54) bool -> . bool AND bool
+    (55) bool -> . bool OR bool
+    (56) bool -> . expression relop expression
+    (57) bool -> . ( bool )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    NOT             shift and go to state 67
+    (               shift and go to state 66
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+
+    expression                     shift and go to state 63
+    bool                           shift and go to state 98
+
+state 68
+
+    (37) cond -> IF bool . THEN statement
+    (38) cond -> IF bool . THEN statement ELSE statement
+    (54) bool -> bool . AND bool
+    (55) bool -> bool . OR bool
+
+    THEN            shift and go to state 99
+    AND             shift and go to state 100
+    OR              shift and go to state 101
+
+
+state 69
+
+    (31) print -> PRINT ( . string_constant G )
+
+    string_constant shift and go to state 102
+
+
+state 70
+
+    (34) read -> READ ( . string_constant H )
+
+    string_constant shift and go to state 103
+
+
+state 71
+
+    (17) var_decl -> identifier E : type .
+
+    identifier      reduce using rule 17 (var_decl -> identifier E : type .)
+    PROCEDURE       reduce using rule 17 (var_decl -> identifier E : type .)
+    BEGIN           reduce using rule 17 (var_decl -> identifier E : type .)
+    END             reduce using rule 17 (var_decl -> identifier E : type .)
+    PRINT           reduce using rule 17 (var_decl -> identifier E : type .)
+    READ            reduce using rule 17 (var_decl -> identifier E : type .)
+    IF              reduce using rule 17 (var_decl -> identifier E : type .)
+    FOR             reduce using rule 17 (var_decl -> identifier E : type .)
+    RETURN          reduce using rule 17 (var_decl -> identifier E : type .)
+    CALL            reduce using rule 17 (var_decl -> identifier E : type .)
+
+
+state 72
+
+    (28) type -> INTEGER .
+
+    ;               reduce using rule 28 (type -> INTEGER .)
+    )               reduce using rule 28 (type -> INTEGER .)
+    identifier      reduce using rule 28 (type -> INTEGER .)
+    PROCEDURE       reduce using rule 28 (type -> INTEGER .)
+    BEGIN           reduce using rule 28 (type -> INTEGER .)
+    END             reduce using rule 28 (type -> INTEGER .)
+    PRINT           reduce using rule 28 (type -> INTEGER .)
+    READ            reduce using rule 28 (type -> INTEGER .)
+    IF              reduce using rule 28 (type -> INTEGER .)
+    FOR             reduce using rule 28 (type -> INTEGER .)
+    RETURN          reduce using rule 28 (type -> INTEGER .)
+    CALL            reduce using rule 28 (type -> INTEGER .)
+
+
+state 73
+
+    (22) F_1 -> ; . format F_1
+    (23) format -> . identifier E : type
+    (24) format -> . identifier E : mode type
+
+    identifier      shift and go to state 53
+
+    format                         shift and go to state 104
+
+state 74
+
+    (21) F_1 -> empty .
+
+    )               reduce using rule 21 (F_1 -> empty .)
+
+
+state 75
+
+    (20) F -> format F_1 .
+
+    )               reduce using rule 20 (F -> format F_1 .)
+
+
+state 76
+
+    (23) format -> identifier E . : type
+    (24) format -> identifier E . : mode type
+
+    :               shift and go to state 105
+
+
+state 77
+
+    (18) proc_decl -> PROCEDURE identifier ( F ) . ; block
+
+    ;               shift and go to state 106
+
+
+state 78
+
+    (39) call -> CALL identifier ( . )
+    (40) call -> CALL identifier ( . expression G )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    )               shift and go to state 108
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 107
+
+state 79
+
+    (43) statement_assign -> var assign_op expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    ELSE            reduce using rule 43 (statement_assign -> var assign_op expression .)
+    BEGIN           reduce using rule 43 (statement_assign -> var assign_op expression .)
+    PRINT           reduce using rule 43 (statement_assign -> var assign_op expression .)
+    READ            reduce using rule 43 (statement_assign -> var assign_op expression .)
+    IF              reduce using rule 43 (statement_assign -> var assign_op expression .)
+    FOR             reduce using rule 43 (statement_assign -> var assign_op expression .)
+    RETURN          reduce using rule 43 (statement_assign -> var assign_op expression .)
+    CALL            reduce using rule 43 (statement_assign -> var assign_op expression .)
+    identifier      reduce using rule 43 (statement_assign -> var assign_op expression .)
+    END             reduce using rule 43 (statement_assign -> var assign_op expression .)
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+
+state 80
+
+    (72) expression -> ( . expression )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 109
+
+state 81
+
+    (42) var -> identifier [ expression . ]
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    ]               shift and go to state 110
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+
+state 82
+
+    (29) block -> BEGIN A B . D END
+    (30) block -> BEGIN A B . END
+    (12) D -> . statement
+    (13) D -> . statement D
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    END             shift and go to state 112
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 40
+    D                              shift and go to state 111
+    var                            shift and go to state 42
+    statement_assign               shift and go to state 33
+    return                         shift and go to state 45
+    call                           shift and go to state 34
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    print                          shift and go to state 38
+
+state 83
+
+    (59) statement_for -> FOR identifier assign_op . TO expression DO statement
+
+    TO              shift and go to state 113
+
+
+state 84
+
+    (62) relop -> > .
+
+    integer_constant reduce using rule 62 (relop -> > .)
+    -               reduce using rule 62 (relop -> > .)
+    (               reduce using rule 62 (relop -> > .)
+
+
+state 85
+
+    (60) relop -> = .
+
+    integer_constant reduce using rule 60 (relop -> = .)
+    -               reduce using rule 60 (relop -> = .)
+    (               reduce using rule 60 (relop -> = .)
+
+
+state 86
+
+    (67) expression -> expression + . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 114
+
+state 87
+
+    (68) expression -> expression - . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 115
+
+state 88
+
+    (70) expression -> expression / . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 116
+
+state 89
+
+    (69) expression -> expression * . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 117
+
+state 90
+
+    (61) relop -> less_equal_sign .
+
+    integer_constant reduce using rule 61 (relop -> less_equal_sign .)
+    -               reduce using rule 61 (relop -> less_equal_sign .)
+    (               reduce using rule 61 (relop -> less_equal_sign .)
+
+
+state 91
+
+    (65) relop -> not_equal_sign .
+
+    integer_constant reduce using rule 65 (relop -> not_equal_sign .)
+    -               reduce using rule 65 (relop -> not_equal_sign .)
+    (               reduce using rule 65 (relop -> not_equal_sign .)
+
+
+state 92
+
+    (56) bool -> expression relop . expression
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 118
+
+state 93
+
+    (63) relop -> greater_equal_sign .
+
+    integer_constant reduce using rule 63 (relop -> greater_equal_sign .)
+    -               reduce using rule 63 (relop -> greater_equal_sign .)
+    (               reduce using rule 63 (relop -> greater_equal_sign .)
+
+
+state 94
+
+    (64) relop -> < .
+
+    integer_constant reduce using rule 64 (relop -> < .)
+    -               reduce using rule 64 (relop -> < .)
+    (               reduce using rule 64 (relop -> < .)
+
+
+state 95
+
+    (71) expression -> - expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    +               reduce using rule 71 (expression -> - expression .)
+    -               reduce using rule 71 (expression -> - expression .)
+    *               reduce using rule 71 (expression -> - expression .)
+    /               reduce using rule 71 (expression -> - expression .)
+    =               reduce using rule 71 (expression -> - expression .)
+    less_equal_sign reduce using rule 71 (expression -> - expression .)
+    >               reduce using rule 71 (expression -> - expression .)
+    greater_equal_sign reduce using rule 71 (expression -> - expression .)
+    <               reduce using rule 71 (expression -> - expression .)
+    not_equal_sign  reduce using rule 71 (expression -> - expression .)
+    BEGIN           reduce using rule 71 (expression -> - expression .)
+    PRINT           reduce using rule 71 (expression -> - expression .)
+    READ            reduce using rule 71 (expression -> - expression .)
+    IF              reduce using rule 71 (expression -> - expression .)
+    FOR             reduce using rule 71 (expression -> - expression .)
+    RETURN          reduce using rule 71 (expression -> - expression .)
+    CALL            reduce using rule 71 (expression -> - expression .)
+    identifier      reduce using rule 71 (expression -> - expression .)
+    END             reduce using rule 71 (expression -> - expression .)
+    ELSE            reduce using rule 71 (expression -> - expression .)
+    ]               reduce using rule 71 (expression -> - expression .)
+    )               reduce using rule 71 (expression -> - expression .)
+    ,               reduce using rule 71 (expression -> - expression .)
+    THEN            reduce using rule 71 (expression -> - expression .)
+    AND             reduce using rule 71 (expression -> - expression .)
+    OR              reduce using rule 71 (expression -> - expression .)
+    DO              reduce using rule 71 (expression -> - expression .)
+
+  ! +               [ shift and go to state 86 ]
+  ! -               [ shift and go to state 87 ]
+  ! *               [ shift and go to state 89 ]
+  ! /               [ shift and go to state 88 ]
+
+
+state 96
+
+    (72) expression -> ( expression . )
+    (56) bool -> expression . relop expression
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+    (60) relop -> . =
+    (61) relop -> . less_equal_sign
+    (62) relop -> . >
+    (63) relop -> . greater_equal_sign
+    (64) relop -> . <
+    (65) relop -> . not_equal_sign
+
+    )               shift and go to state 119
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+    =               shift and go to state 85
+    less_equal_sign shift and go to state 90
+    >               shift and go to state 84
+    greater_equal_sign shift and go to state 93
+    <               shift and go to state 94
+    not_equal_sign  shift and go to state 91
+
+    relop                          shift and go to state 92
+
+state 97
+
+    (57) bool -> ( bool . )
+    (54) bool -> bool . AND bool
+    (55) bool -> bool . OR bool
+
+    )               shift and go to state 120
+    AND             shift and go to state 100
+    OR              shift and go to state 101
+
+
+state 98
+
+    (53) bool -> NOT bool .
+    (54) bool -> bool . AND bool
+    (55) bool -> bool . OR bool
+
+    AND             reduce using rule 53 (bool -> NOT bool .)
+    OR              reduce using rule 53 (bool -> NOT bool .)
+    THEN            reduce using rule 53 (bool -> NOT bool .)
+    )               reduce using rule 53 (bool -> NOT bool .)
+
+  ! AND             [ shift and go to state 100 ]
+  ! OR              [ shift and go to state 101 ]
+
+
+state 99
+
+    (37) cond -> IF bool THEN . statement
+    (38) cond -> IF bool THEN . statement ELSE statement
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 121
+    var                            shift and go to state 42
+    statement_assign               shift and go to state 33
+    call                           shift and go to state 34
+    return                         shift and go to state 45
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    print                          shift and go to state 38
+
+state 100
+
+    (54) bool -> bool AND . bool
+    (53) bool -> . NOT bool
+    (54) bool -> . bool AND bool
+    (55) bool -> . bool OR bool
+    (56) bool -> . expression relop expression
+    (57) bool -> . ( bool )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    NOT             shift and go to state 67
+    (               shift and go to state 66
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+
+    expression                     shift and go to state 63
+    bool                           shift and go to state 122
+
+state 101
+
+    (55) bool -> bool OR . bool
+    (53) bool -> . NOT bool
+    (54) bool -> . bool AND bool
+    (55) bool -> . bool OR bool
+    (56) bool -> . expression relop expression
+    (57) bool -> . ( bool )
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    NOT             shift and go to state 67
+    (               shift and go to state 66
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+
+    expression                     shift and go to state 63
+    bool                           shift and go to state 123
+
+state 102
+
+    (31) print -> PRINT ( string_constant . G )
+    (32) G -> . empty
+    (33) G -> . , expression G
+    (58) empty -> .
+
+    ,               shift and go to state 125
+    )               reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 124
+    G                              shift and go to state 126
+
+state 103
+
+    (34) read -> READ ( string_constant . H )
+    (35) H -> . empty
+    (36) H -> . , var H
+    (58) empty -> .
+
+    ,               shift and go to state 127
+    )               reduce using rule 58 (empty -> .)
+
+    H                              shift and go to state 128
+    empty                          shift and go to state 129
+
+state 104
+
+    (22) F_1 -> ; format . F_1
+    (21) F_1 -> . empty
+    (22) F_1 -> . ; format F_1
+    (58) empty -> .
+
+    ;               shift and go to state 73
+    )               reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 74
+    F_1                            shift and go to state 130
+
+state 105
+
+    (23) format -> identifier E : . type
+    (24) format -> identifier E : . mode type
+    (28) type -> . INTEGER
+    (25) mode -> . IN
+    (26) mode -> . OUT
+    (27) mode -> . IN_OUT
+
+    INTEGER         shift and go to state 72
+    IN              shift and go to state 133
+    OUT             shift and go to state 131
+    IN_OUT          shift and go to state 132
+
+    type                           shift and go to state 134
+    mode                           shift and go to state 135
+
+state 106
+
+    (18) proc_decl -> PROCEDURE identifier ( F ) ; . block
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+
+    BEGIN           shift and go to state 44
+
+    block                          shift and go to state 136
+
+state 107
+
+    (40) call -> CALL identifier ( expression . G )
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+    (32) G -> . empty
+    (33) G -> . , expression G
+    (58) empty -> .
+
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+    ,               shift and go to state 125
+    )               reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 124
+    G                              shift and go to state 137
+
+state 108
+
+    (39) call -> CALL identifier ( ) .
+
+    BEGIN           reduce using rule 39 (call -> CALL identifier ( ) .)
+    PRINT           reduce using rule 39 (call -> CALL identifier ( ) .)
+    READ            reduce using rule 39 (call -> CALL identifier ( ) .)
+    IF              reduce using rule 39 (call -> CALL identifier ( ) .)
+    FOR             reduce using rule 39 (call -> CALL identifier ( ) .)
+    RETURN          reduce using rule 39 (call -> CALL identifier ( ) .)
+    CALL            reduce using rule 39 (call -> CALL identifier ( ) .)
+    identifier      reduce using rule 39 (call -> CALL identifier ( ) .)
+    END             reduce using rule 39 (call -> CALL identifier ( ) .)
+    ELSE            reduce using rule 39 (call -> CALL identifier ( ) .)
+
+
+state 109
+
+    (72) expression -> ( expression . )
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    )               shift and go to state 119
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+
+state 110
+
+    (42) var -> identifier [ expression ] .
+
+    assign_op       reduce using rule 42 (var -> identifier [ expression ] .)
+    ,               reduce using rule 42 (var -> identifier [ expression ] .)
+    )               reduce using rule 42 (var -> identifier [ expression ] .)
+
+
+state 111
+
+    (29) block -> BEGIN A B D . END
+
+    END             shift and go to state 138
+
+
+state 112
+
+    (30) block -> BEGIN A B END .
+
+    ELSE            reduce using rule 30 (block -> BEGIN A B END .)
+    BEGIN           reduce using rule 30 (block -> BEGIN A B END .)
+    PRINT           reduce using rule 30 (block -> BEGIN A B END .)
+    READ            reduce using rule 30 (block -> BEGIN A B END .)
+    IF              reduce using rule 30 (block -> BEGIN A B END .)
+    FOR             reduce using rule 30 (block -> BEGIN A B END .)
+    RETURN          reduce using rule 30 (block -> BEGIN A B END .)
+    CALL            reduce using rule 30 (block -> BEGIN A B END .)
+    identifier      reduce using rule 30 (block -> BEGIN A B END .)
+    END             reduce using rule 30 (block -> BEGIN A B END .)
+    PROCEDURE       reduce using rule 30 (block -> BEGIN A B END .)
+
+
+state 113
+
+    (59) statement_for -> FOR identifier assign_op TO . expression DO statement
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 139
+
+state 114
+
+    (67) expression -> expression + expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    +               reduce using rule 67 (expression -> expression + expression .)
+    -               reduce using rule 67 (expression -> expression + expression .)
+    =               reduce using rule 67 (expression -> expression + expression .)
+    less_equal_sign reduce using rule 67 (expression -> expression + expression .)
+    >               reduce using rule 67 (expression -> expression + expression .)
+    greater_equal_sign reduce using rule 67 (expression -> expression + expression .)
+    <               reduce using rule 67 (expression -> expression + expression .)
+    not_equal_sign  reduce using rule 67 (expression -> expression + expression .)
+    BEGIN           reduce using rule 67 (expression -> expression + expression .)
+    PRINT           reduce using rule 67 (expression -> expression + expression .)
+    READ            reduce using rule 67 (expression -> expression + expression .)
+    IF              reduce using rule 67 (expression -> expression + expression .)
+    FOR             reduce using rule 67 (expression -> expression + expression .)
+    RETURN          reduce using rule 67 (expression -> expression + expression .)
+    CALL            reduce using rule 67 (expression -> expression + expression .)
+    identifier      reduce using rule 67 (expression -> expression + expression .)
+    END             reduce using rule 67 (expression -> expression + expression .)
+    ELSE            reduce using rule 67 (expression -> expression + expression .)
+    ]               reduce using rule 67 (expression -> expression + expression .)
+    )               reduce using rule 67 (expression -> expression + expression .)
+    ,               reduce using rule 67 (expression -> expression + expression .)
+    THEN            reduce using rule 67 (expression -> expression + expression .)
+    AND             reduce using rule 67 (expression -> expression + expression .)
+    OR              reduce using rule 67 (expression -> expression + expression .)
+    DO              reduce using rule 67 (expression -> expression + expression .)
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+  ! *               [ reduce using rule 67 (expression -> expression + expression .) ]
+  ! /               [ reduce using rule 67 (expression -> expression + expression .) ]
+  ! +               [ shift and go to state 86 ]
+  ! -               [ shift and go to state 87 ]
+
+
+state 115
+
+    (68) expression -> expression - expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    +               reduce using rule 68 (expression -> expression - expression .)
+    -               reduce using rule 68 (expression -> expression - expression .)
+    =               reduce using rule 68 (expression -> expression - expression .)
+    less_equal_sign reduce using rule 68 (expression -> expression - expression .)
+    >               reduce using rule 68 (expression -> expression - expression .)
+    greater_equal_sign reduce using rule 68 (expression -> expression - expression .)
+    <               reduce using rule 68 (expression -> expression - expression .)
+    not_equal_sign  reduce using rule 68 (expression -> expression - expression .)
+    BEGIN           reduce using rule 68 (expression -> expression - expression .)
+    PRINT           reduce using rule 68 (expression -> expression - expression .)
+    READ            reduce using rule 68 (expression -> expression - expression .)
+    IF              reduce using rule 68 (expression -> expression - expression .)
+    FOR             reduce using rule 68 (expression -> expression - expression .)
+    RETURN          reduce using rule 68 (expression -> expression - expression .)
+    CALL            reduce using rule 68 (expression -> expression - expression .)
+    identifier      reduce using rule 68 (expression -> expression - expression .)
+    END             reduce using rule 68 (expression -> expression - expression .)
+    ELSE            reduce using rule 68 (expression -> expression - expression .)
+    ]               reduce using rule 68 (expression -> expression - expression .)
+    )               reduce using rule 68 (expression -> expression - expression .)
+    ,               reduce using rule 68 (expression -> expression - expression .)
+    THEN            reduce using rule 68 (expression -> expression - expression .)
+    AND             reduce using rule 68 (expression -> expression - expression .)
+    OR              reduce using rule 68 (expression -> expression - expression .)
+    DO              reduce using rule 68 (expression -> expression - expression .)
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+  ! *               [ reduce using rule 68 (expression -> expression - expression .) ]
+  ! /               [ reduce using rule 68 (expression -> expression - expression .) ]
+  ! +               [ shift and go to state 86 ]
+  ! -               [ shift and go to state 87 ]
+
+
+state 116
+
+    (70) expression -> expression / expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    +               reduce using rule 70 (expression -> expression / expression .)
+    -               reduce using rule 70 (expression -> expression / expression .)
+    *               reduce using rule 70 (expression -> expression / expression .)
+    /               reduce using rule 70 (expression -> expression / expression .)
+    =               reduce using rule 70 (expression -> expression / expression .)
+    less_equal_sign reduce using rule 70 (expression -> expression / expression .)
+    >               reduce using rule 70 (expression -> expression / expression .)
+    greater_equal_sign reduce using rule 70 (expression -> expression / expression .)
+    <               reduce using rule 70 (expression -> expression / expression .)
+    not_equal_sign  reduce using rule 70 (expression -> expression / expression .)
+    BEGIN           reduce using rule 70 (expression -> expression / expression .)
+    PRINT           reduce using rule 70 (expression -> expression / expression .)
+    READ            reduce using rule 70 (expression -> expression / expression .)
+    IF              reduce using rule 70 (expression -> expression / expression .)
+    FOR             reduce using rule 70 (expression -> expression / expression .)
+    RETURN          reduce using rule 70 (expression -> expression / expression .)
+    CALL            reduce using rule 70 (expression -> expression / expression .)
+    identifier      reduce using rule 70 (expression -> expression / expression .)
+    END             reduce using rule 70 (expression -> expression / expression .)
+    ELSE            reduce using rule 70 (expression -> expression / expression .)
+    ]               reduce using rule 70 (expression -> expression / expression .)
+    )               reduce using rule 70 (expression -> expression / expression .)
+    ,               reduce using rule 70 (expression -> expression / expression .)
+    THEN            reduce using rule 70 (expression -> expression / expression .)
+    AND             reduce using rule 70 (expression -> expression / expression .)
+    OR              reduce using rule 70 (expression -> expression / expression .)
+    DO              reduce using rule 70 (expression -> expression / expression .)
+
+  ! +               [ shift and go to state 86 ]
+  ! -               [ shift and go to state 87 ]
+  ! *               [ shift and go to state 89 ]
+  ! /               [ shift and go to state 88 ]
+
+
+state 117
+
+    (69) expression -> expression * expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    +               reduce using rule 69 (expression -> expression * expression .)
+    -               reduce using rule 69 (expression -> expression * expression .)
+    *               reduce using rule 69 (expression -> expression * expression .)
+    /               reduce using rule 69 (expression -> expression * expression .)
+    =               reduce using rule 69 (expression -> expression * expression .)
+    less_equal_sign reduce using rule 69 (expression -> expression * expression .)
+    >               reduce using rule 69 (expression -> expression * expression .)
+    greater_equal_sign reduce using rule 69 (expression -> expression * expression .)
+    <               reduce using rule 69 (expression -> expression * expression .)
+    not_equal_sign  reduce using rule 69 (expression -> expression * expression .)
+    BEGIN           reduce using rule 69 (expression -> expression * expression .)
+    PRINT           reduce using rule 69 (expression -> expression * expression .)
+    READ            reduce using rule 69 (expression -> expression * expression .)
+    IF              reduce using rule 69 (expression -> expression * expression .)
+    FOR             reduce using rule 69 (expression -> expression * expression .)
+    RETURN          reduce using rule 69 (expression -> expression * expression .)
+    CALL            reduce using rule 69 (expression -> expression * expression .)
+    identifier      reduce using rule 69 (expression -> expression * expression .)
+    END             reduce using rule 69 (expression -> expression * expression .)
+    ELSE            reduce using rule 69 (expression -> expression * expression .)
+    ]               reduce using rule 69 (expression -> expression * expression .)
+    )               reduce using rule 69 (expression -> expression * expression .)
+    ,               reduce using rule 69 (expression -> expression * expression .)
+    THEN            reduce using rule 69 (expression -> expression * expression .)
+    AND             reduce using rule 69 (expression -> expression * expression .)
+    OR              reduce using rule 69 (expression -> expression * expression .)
+    DO              reduce using rule 69 (expression -> expression * expression .)
+
+  ! +               [ shift and go to state 86 ]
+  ! -               [ shift and go to state 87 ]
+  ! *               [ shift and go to state 89 ]
+  ! /               [ shift and go to state 88 ]
+
+
+state 118
+
+    (56) bool -> expression relop expression .
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    AND             reduce using rule 56 (bool -> expression relop expression .)
+    OR              reduce using rule 56 (bool -> expression relop expression .)
+    THEN            reduce using rule 56 (bool -> expression relop expression .)
+    )               reduce using rule 56 (bool -> expression relop expression .)
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+
+state 119
+
+    (72) expression -> ( expression ) .
+
+    +               reduce using rule 72 (expression -> ( expression ) .)
+    -               reduce using rule 72 (expression -> ( expression ) .)
+    *               reduce using rule 72 (expression -> ( expression ) .)
+    /               reduce using rule 72 (expression -> ( expression ) .)
+    =               reduce using rule 72 (expression -> ( expression ) .)
+    less_equal_sign reduce using rule 72 (expression -> ( expression ) .)
+    >               reduce using rule 72 (expression -> ( expression ) .)
+    greater_equal_sign reduce using rule 72 (expression -> ( expression ) .)
+    <               reduce using rule 72 (expression -> ( expression ) .)
+    not_equal_sign  reduce using rule 72 (expression -> ( expression ) .)
+    BEGIN           reduce using rule 72 (expression -> ( expression ) .)
+    PRINT           reduce using rule 72 (expression -> ( expression ) .)
+    READ            reduce using rule 72 (expression -> ( expression ) .)
+    IF              reduce using rule 72 (expression -> ( expression ) .)
+    FOR             reduce using rule 72 (expression -> ( expression ) .)
+    RETURN          reduce using rule 72 (expression -> ( expression ) .)
+    CALL            reduce using rule 72 (expression -> ( expression ) .)
+    identifier      reduce using rule 72 (expression -> ( expression ) .)
+    END             reduce using rule 72 (expression -> ( expression ) .)
+    ELSE            reduce using rule 72 (expression -> ( expression ) .)
+    ]               reduce using rule 72 (expression -> ( expression ) .)
+    )               reduce using rule 72 (expression -> ( expression ) .)
+    ,               reduce using rule 72 (expression -> ( expression ) .)
+    THEN            reduce using rule 72 (expression -> ( expression ) .)
+    AND             reduce using rule 72 (expression -> ( expression ) .)
+    OR              reduce using rule 72 (expression -> ( expression ) .)
+    DO              reduce using rule 72 (expression -> ( expression ) .)
+
+
+state 120
+
+    (57) bool -> ( bool ) .
+
+    AND             reduce using rule 57 (bool -> ( bool ) .)
+    OR              reduce using rule 57 (bool -> ( bool ) .)
+    THEN            reduce using rule 57 (bool -> ( bool ) .)
+    )               reduce using rule 57 (bool -> ( bool ) .)
+
+
+state 121
+
+    (37) cond -> IF bool THEN statement .
+    (38) cond -> IF bool THEN statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    BEGIN           reduce using rule 37 (cond -> IF bool THEN statement .)
+    PRINT           reduce using rule 37 (cond -> IF bool THEN statement .)
+    READ            reduce using rule 37 (cond -> IF bool THEN statement .)
+    IF              reduce using rule 37 (cond -> IF bool THEN statement .)
+    FOR             reduce using rule 37 (cond -> IF bool THEN statement .)
+    RETURN          reduce using rule 37 (cond -> IF bool THEN statement .)
+    CALL            reduce using rule 37 (cond -> IF bool THEN statement .)
+    identifier      reduce using rule 37 (cond -> IF bool THEN statement .)
+    END             reduce using rule 37 (cond -> IF bool THEN statement .)
+    ELSE            shift and go to state 140
+
+  ! ELSE            [ reduce using rule 37 (cond -> IF bool THEN statement .) ]
+
+
+state 122
+
+    (54) bool -> bool AND bool .
+    (54) bool -> bool . AND bool
+    (55) bool -> bool . OR bool
+
+    AND             reduce using rule 54 (bool -> bool AND bool .)
+    OR              reduce using rule 54 (bool -> bool AND bool .)
+    THEN            reduce using rule 54 (bool -> bool AND bool .)
+    )               reduce using rule 54 (bool -> bool AND bool .)
+
+  ! AND             [ shift and go to state 100 ]
+  ! OR              [ shift and go to state 101 ]
+
+
+state 123
+
+    (55) bool -> bool OR bool .
+    (54) bool -> bool . AND bool
+    (55) bool -> bool . OR bool
+
+    AND             reduce using rule 55 (bool -> bool OR bool .)
+    OR              reduce using rule 55 (bool -> bool OR bool .)
+    THEN            reduce using rule 55 (bool -> bool OR bool .)
+    )               reduce using rule 55 (bool -> bool OR bool .)
+
+  ! AND             [ shift and go to state 100 ]
+  ! OR              [ shift and go to state 101 ]
+
+
+state 124
+
+    (32) G -> empty .
+
+    )               reduce using rule 32 (G -> empty .)
+
+
+state 125
+
+    (33) G -> , . expression G
+    (66) expression -> . integer_constant
+    (67) expression -> . expression + expression
+    (68) expression -> . expression - expression
+    (69) expression -> . expression * expression
+    (70) expression -> . expression / expression
+    (71) expression -> . - expression
+    (72) expression -> . ( expression )
+
+    integer_constant shift and go to state 65
+    -               shift and go to state 64
+    (               shift and go to state 80
+
+    expression                     shift and go to state 141
+
+state 126
+
+    (31) print -> PRINT ( string_constant G . )
+
+    )               shift and go to state 142
+
+
+state 127
+
+    (36) H -> , . var H
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    identifier      shift and go to state 43
+
+    var                            shift and go to state 143
+
+state 128
+
+    (34) read -> READ ( string_constant H . )
+
+    )               shift and go to state 144
+
+
+state 129
+
+    (35) H -> empty .
+
+    )               reduce using rule 35 (H -> empty .)
+
+
+state 130
+
+    (22) F_1 -> ; format F_1 .
+
+    )               reduce using rule 22 (F_1 -> ; format F_1 .)
+
+
+state 131
+
+    (26) mode -> OUT .
+
+    INTEGER         reduce using rule 26 (mode -> OUT .)
+
+
+state 132
+
+    (27) mode -> IN_OUT .
+
+    INTEGER         reduce using rule 27 (mode -> IN_OUT .)
+
+
+state 133
+
+    (25) mode -> IN .
+
+    INTEGER         reduce using rule 25 (mode -> IN .)
+
+
+state 134
+
+    (23) format -> identifier E : type .
+
+    ;               reduce using rule 23 (format -> identifier E : type .)
+    )               reduce using rule 23 (format -> identifier E : type .)
+
+
+state 135
+
+    (24) format -> identifier E : mode . type
+    (28) type -> . INTEGER
+
+    INTEGER         shift and go to state 72
+
+    type                           shift and go to state 145
+
+state 136
+
+    (18) proc_decl -> PROCEDURE identifier ( F ) ; block .
+
+    PROCEDURE       reduce using rule 18 (proc_decl -> PROCEDURE identifier ( F ) ; block .)
+    BEGIN           reduce using rule 18 (proc_decl -> PROCEDURE identifier ( F ) ; block .)
+
+
+state 137
+
+    (40) call -> CALL identifier ( expression G . )
+
+    )               shift and go to state 146
+
+
+state 138
+
+    (29) block -> BEGIN A B D END .
+
+    ELSE            reduce using rule 29 (block -> BEGIN A B D END .)
+    BEGIN           reduce using rule 29 (block -> BEGIN A B D END .)
+    PRINT           reduce using rule 29 (block -> BEGIN A B D END .)
+    READ            reduce using rule 29 (block -> BEGIN A B D END .)
+    IF              reduce using rule 29 (block -> BEGIN A B D END .)
+    FOR             reduce using rule 29 (block -> BEGIN A B D END .)
+    RETURN          reduce using rule 29 (block -> BEGIN A B D END .)
+    CALL            reduce using rule 29 (block -> BEGIN A B D END .)
+    identifier      reduce using rule 29 (block -> BEGIN A B D END .)
+    END             reduce using rule 29 (block -> BEGIN A B D END .)
+    PROCEDURE       reduce using rule 29 (block -> BEGIN A B D END .)
+
+
+state 139
+
+    (59) statement_for -> FOR identifier assign_op TO expression . DO statement
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+
+    DO              shift and go to state 147
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+
+
+state 140
+
+    (38) cond -> IF bool THEN statement ELSE . statement
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 148
+    var                            shift and go to state 42
+    statement_assign               shift and go to state 33
+    call                           shift and go to state 34
+    return                         shift and go to state 45
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    print                          shift and go to state 38
+
+state 141
+
+    (33) G -> , expression . G
+    (67) expression -> expression . + expression
+    (68) expression -> expression . - expression
+    (69) expression -> expression . * expression
+    (70) expression -> expression . / expression
+    (32) G -> . empty
+    (33) G -> . , expression G
+    (58) empty -> .
+
+    +               shift and go to state 86
+    -               shift and go to state 87
+    *               shift and go to state 89
+    /               shift and go to state 88
+    ,               shift and go to state 125
+    )               reduce using rule 58 (empty -> .)
+
+    empty                          shift and go to state 124
+    G                              shift and go to state 149
+
+state 142
+
+    (31) print -> PRINT ( string_constant G ) .
+
+    ELSE            reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    BEGIN           reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    PRINT           reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    READ            reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    IF              reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    FOR             reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    RETURN          reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    CALL            reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    identifier      reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+    END             reduce using rule 31 (print -> PRINT ( string_constant G ) .)
+
+
+state 143
+
+    (36) H -> , var . H
+    (35) H -> . empty
+    (36) H -> . , var H
+    (58) empty -> .
+
+    ,               shift and go to state 127
+    )               reduce using rule 58 (empty -> .)
+
+    H                              shift and go to state 150
+    empty                          shift and go to state 129
+
+state 144
+
+    (34) read -> READ ( string_constant H ) .
+
+    BEGIN           reduce using rule 34 (read -> READ ( string_constant H ) .)
+    PRINT           reduce using rule 34 (read -> READ ( string_constant H ) .)
+    READ            reduce using rule 34 (read -> READ ( string_constant H ) .)
+    IF              reduce using rule 34 (read -> READ ( string_constant H ) .)
+    FOR             reduce using rule 34 (read -> READ ( string_constant H ) .)
+    RETURN          reduce using rule 34 (read -> READ ( string_constant H ) .)
+    CALL            reduce using rule 34 (read -> READ ( string_constant H ) .)
+    identifier      reduce using rule 34 (read -> READ ( string_constant H ) .)
+    END             reduce using rule 34 (read -> READ ( string_constant H ) .)
+    ELSE            reduce using rule 34 (read -> READ ( string_constant H ) .)
+
+
+state 145
+
+    (24) format -> identifier E : mode type .
+
+    ;               reduce using rule 24 (format -> identifier E : mode type .)
+    )               reduce using rule 24 (format -> identifier E : mode type .)
+
+
+state 146
+
+    (40) call -> CALL identifier ( expression G ) .
+
+    BEGIN           reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    PRINT           reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    READ            reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    IF              reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    FOR             reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    RETURN          reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    CALL            reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    identifier      reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    END             reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+    ELSE            reduce using rule 40 (call -> CALL identifier ( expression G ) .)
+
+
+state 147
+
+    (59) statement_for -> FOR identifier assign_op TO expression DO . statement
+    (44) statement -> . block
+    (45) statement -> . print
+    (46) statement -> . read
+    (47) statement -> . statement_assign
+    (48) statement -> . cond
+    (49) statement -> . statement_for
+    (50) statement -> . return
+    (51) statement -> . call
+    (29) block -> . BEGIN A B D END
+    (30) block -> . BEGIN A B END
+    (31) print -> . PRINT ( string_constant G )
+    (34) read -> . READ ( string_constant H )
+    (43) statement_assign -> . var assign_op expression
+    (37) cond -> . IF bool THEN statement
+    (38) cond -> . IF bool THEN statement ELSE statement
+    (59) statement_for -> . FOR identifier assign_op TO expression DO statement
+    (52) return -> . RETURN
+    (39) call -> . CALL identifier ( )
+    (40) call -> . CALL identifier ( expression G )
+    (41) var -> . identifier
+    (42) var -> . identifier [ expression ]
+
+    BEGIN           shift and go to state 44
+    PRINT           shift and go to state 49
+    READ            shift and go to state 50
+    IF              shift and go to state 47
+    FOR             shift and go to state 46
+    RETURN          shift and go to state 48
+    CALL            shift and go to state 32
+    identifier      shift and go to state 43
+
+    block                          shift and go to state 39
+    statement                      shift and go to state 151
+    statement_assign               shift and go to state 33
+    call                           shift and go to state 34
+    return                         shift and go to state 45
+    read                           shift and go to state 35
+    statement_for                  shift and go to state 36
+    cond                           shift and go to state 37
+    var                            shift and go to state 42
+    print                          shift and go to state 38
+
+state 148
+
+    (38) cond -> IF bool THEN statement ELSE statement .
+
+    ELSE            reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    BEGIN           reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    PRINT           reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    READ            reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    IF              reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    FOR             reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    RETURN          reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    CALL            reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    identifier      reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+    END             reduce using rule 38 (cond -> IF bool THEN statement ELSE statement .)
+
+
+state 149
+
+    (33) G -> , expression G .
+
+    )               reduce using rule 33 (G -> , expression G .)
+
+
+state 150
+
+    (36) H -> , var H .
+
+    )               reduce using rule 36 (H -> , var H .)
+
+
+state 151
+
+    (59) statement_for -> FOR identifier assign_op TO expression DO statement .
+
+    BEGIN           reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    PRINT           reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    READ            reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    IF              reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    FOR             reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    RETURN          reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    CALL            reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    identifier      reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    END             reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+    ELSE            reduce using rule 59 (statement_for -> FOR identifier assign_op TO expression DO statement .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for identifier in state 5 resolved as shift
+WARNING: shift/reduce conflict for identifier in state 19 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 121 resolved as shift
